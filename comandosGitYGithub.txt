@@ -1,0 +1,73 @@
+git init // Inicio mi carpeta en la que estoy parada como mi nuevo repositorio git
+git add biografia.txt // Añado en Stage mi archivo “biografia.txt"
+git add . // Añado todos mis archivos con cambios hechos en esa carpeta a Stage
+git commit -m “versión 1” // Hago entrada o commit de mis archivos a mi repositorio en mi disco duro
+git commit -am “descripción” // Este comando es un add y un commit junto, y funciona simepre y cuando los archivos que este haciendo commit ya hayan sido anteriormente adheridos al repositorio o mejor dicho que no sean nuevos
+git status // Estado de mi rama
+git show // Muestra todos mis cambios hechos
+git log biografia.txt // Ver el historial de mi archivo
+git push // Enviar a mi repositorio remoto todos mis archivos
+git pull // Traer a mi repositorio local todos mis archivos
+git rm --cached biografia.txt // Revierte el add cuando este se encuentra en Stage. Elimina los archivos del área de Staging y del próximo commit pero los mantiene en nuestro disco duro.
+git rm --force // Elimina los archivos de Git y del disco duro. Git siempre guarda todo, por lo que podemos acceder al registro de la existencia de los archivos, de modo que podremos recuperarlos si es necesario (pero debemos usar comandos más avanzados).
+git config --list // Me muestra las configuraciones del Git
+git config --list --show -origin // Me muestra donde estan ubicadas las configuraciones de Git
+git config --global user.name “Alejandro” // Setea de forma global el usuario Git
+git config --global user.email "mail@gmail.co” // Setea el correo del usuario Git
+git diff // Podemos ver los cambios incluso cuando tengamos archivos en Stage y hayamos hecho cambios nuevos cuando estos archivos estan en Stage
+git diff [Hash del commit] [Hash del commit] // Cuando sacamos un log de algun archivo podemos tomar sus hash para mirar las diferencias de sus cambios
+
+/** Volviendo al pasado **/
+git reset [Hash del commit] --hard // Cuando si o si queremos volver a un commit anterior en el tiempo
+git reset [Hash del commit] --soft // Lo mismo que el anterior con la diferencia de que no va a afectar lo que tengamos en stage
+git reset HEAD // Este es el comando para sacar archivos del área de Staging. No para borrarlos ni nada de eso, solo para que los últimos cambios de estos archivos no se envíen al último commit, a menos que cambiemos de opinión y los incluyamos de nuevo en staging con git add, por supuesto.
+git restore biografia.txt // Cuando un archivo es modificado pero no se encuentra en Stage o mucho menos en Commit puede devolverse a su estado inicial con este comando.
+git log --stat // Miro los cambios en Bytes que se hicieron en cada Commit y los archivos que se modificaron
+git checkout [Hash del commit] biografia.txt // Podemos darle al checkout un hash especifico para mirar un commit en especifico
+
+/Jugando con ramas remotas/
+git clone [url_del_servidor_remoto] // Nos permite descargar los archivos de la última versión de la rama principal y todo el historial de cambios en la carpeta .git.
+git push // Luego de hacer git add y git commit debemos ejecutar este comando para mandar los cambios al servidor remoto.
+git fetch: Lo usamos para traer actualizaciones del servidor remoto y guardarlas en nuestro repositorio local (en caso de que hayan, por supuesto).
+git merge: También usamos el comando git fetch con servidores remotos. Lo necesitamos para combinar los últimos cambios del servidor remoto y nuestro directorio de trabajo.
+git pull: Básicamente, git fetch y git merge al mismo tiempo.
+git remote add origin [Direccion de repositorio en git] // Conectamos git local con github
+git remote // ramas remotas
+git remote -v // ramas remotas pero verbal
+git push origin master // Estamos enviando a GitHub nuestros archivos de la rama master que hay local
+git pull origin master // Estamos trayendo a Git local nuestros archivos de la rama master que hay en GitHub
+git pull origin master --allow-unrelated-histories //En caso de que se reuse a hacer merge por la diferencia de historias o commits
+gir remote set-url origin [Direccion de repositorio en git HTTPS o SSH] // Cuando ya tenemos creada una rama remota podemos cambiar la direccion o tipo de conexion con esta sentencia
+
+/Graficando ramas en el terminal/
+git log --all -graph --decorate --oneline
+
+/Puedes guardar comandos de git con alias/
+alias [Como quieres tu llamar tu alias ej: arbolito] = “[Comando de git que quieres guardar en el alias]”
+
+/TAGS/
+–Es recomendado que cuando hagas cambios de tags y se vayan a subir a tu rama remota en GitHub, hagas primero un “git pull origin [rama remota]” para mantenerte actualizado BUENA PRACTICA
+git tag // Te muestra la lista de todos los TAGS
+git tag -a [Nombre del tag ej: v0.1] -m “Soy un comentario de commit” [Y el hash de la rama ej: 1b56158]
+git show-ref --tags
+git push origin --tags // Vamos a enviar a origin nuestros tags creados localmente
+git tag -d [Nombre del tag a eliminar] // Se usa para eliminar de forma local tus tags
+–Como acabamos de hacer un cambio de los tags a manera local, tienes que hacer pull de la rama remota y luego push de tus cambios locales de los tags eliminados
+git push origin :refs/tags/[Nombre del tag que quieres borrar] // Para borrar de manera remota, previamente ya que has borrado el tag de forma local
+
+git ls-remote --tags repository-name // Mostramos las tags que tenemos en nuestro repositorio remoto.
+git push repository-name --delete tagname // Otra forma de borrar los tags de repositorio remoto
+
+–Notas sobre TAGS de Platzi
+Crear un nuevo tag y asignarlo a un commit: git tag -a nombre-del-tag id-del-commit.
+Borrar un tag en el repositorio local: git tag -d nombre-del-tag.
+Listar los tags de nuestro repositorio local: git tag o git show-ref --tags.
+Publicar un tag en el repositorio remoto: git push origin --tags.
+Borrar un tag del repositorio remoto: git tag -d nombre-del-tag y git push origin :refs/tags/nombre-del-tag.
+
+/Ramas o Branches/
+git branch // Muestro mis ramas locales
+git show-branch // Muestra las ramas y algo de informacion de sus commits
+git show-branch --all // Muestra lo mismo que el comando anterior pero con algunos detalles mas: Con las ramas remotas tambien
+gitk // Nos muestra una ayuda visual historicamente de las ramas de git
+git branch [Nombre de la rama que quieres crear]// Creando ramas locales, es recomendable que crees tu nueva rama parandote desde la rama de la cual te vas a basar o recomendable puede ser desde la ultima rama mas actualizada
