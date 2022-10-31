@@ -10,5 +10,10 @@ Un blog increible para el curso de Git y Github de Platzi
 * Trucos muy locos del profesor
 * Las personalidades múltiples de Freddy
 * creado por el increible Lordmorker
+<<<<<<< HEAD
+=======
+* incluye ejemplos en Windows, Linux y Mac
+* Disponible para todas las edades
+>>>>>>> readme-mejorado
 
 Y como un amable recordatorio: **Este readme.md es un chiste**.
